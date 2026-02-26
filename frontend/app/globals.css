@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary: #020617;
+  --bg-secondary: #0f172a;
+  --bg-card: rgba(15, 23, 42, 0.4);
+  --border-glow: rgba(34, 197, 94, 0.15);
+  --text-primary: #f8fafc;
+  --text-muted: #94a3b8;
+  --accent-green: #22c55e;
+  --accent-emerald: #10b981;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-primary);
+  background-image:
+    radial-gradient(circle at 0% 0%, rgba(34, 197, 94, 0.1) 0%, transparent 40%),
+    radial-gradient(circle at 100% 100%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(34, 197, 94, 0.04) 0%, transparent 60%),
+    url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg stroke='rgba(34, 197, 94, 0.02)' stroke-width='0.5'%3E%3Cpath d='M40 40v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-36V0h-2v4h-4v2h4v4h2V6h4V4h-4zM4 40v-4H2v4H0v2h4v4h2v-4h4v-2H4zM4 4V0H2v4H0v2h4v4h2V6h4V4H4z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+/* Glassmorphism card - Premium */
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  border-radius: 20px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+.glass-card:hover {
+  transform: translateY(-4px);
+  background: rgba(15, 23, 42, 0.5);
+  border-color: rgba(34, 197, 94, 0.3);
+  box-shadow: 0 12px 48px 0 rgba(0, 0, 0, 0.6), 0 0 24px 0 rgba(34, 197, 94, 0.15);
+}
+
+/* AQI Severity Colors - Refined */
+.aqi-good {
+  color: #2ecc71;
+}
+
+.aqi-satisfactory {
+  color: #27ae60;
+}
+
+.aqi-moderate {
+  color: #f1c40f;
+}
+
+.aqi-poor {
+  color: #e67e22;
+}
+
+.aqi-verypoor {
+  color: #e74c3c;
+}
+
+.aqi-severe {
+  color: #c0392b;
+}
+
+/* Glowing backgrounds */
+.bg-aqi-good {
+  background: rgba(46, 204, 113, 0.1);
+  border-color: rgba(46, 204, 113, 0.3);
+}
+
+.bg-aqi-moderate {
+  background: rgba(241, 196, 15, 0.1);
+  border-color: rgba(241, 196, 15, 0.3);
+}
+
+.bg-aqi-poor {
+  background: rgba(230, 126, 34, 0.1);
+  border-color: rgba(230, 126, 34, 0.3);
+}
+
+.bg-aqi-severe {
+  background: rgba(192, 57, 43, 0.1);
+  border-color: rgba(192, 57, 43, 0.3);
+}
+
+/* Animations */
+@keyframes bloomPulse {
+
+  0%,
+  100% {
+    opacity: 0.8;
+    filter: blur(8px);
+  }
+
+  50% {
+    opacity: 1;
+    filter: blur(12px);
+  }
+}
+
+.text-glow-green {
+  text-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scrollbar - Premium */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(34, 197, 94, 0.25);
+  border-radius: 10px;
+  border: 2px solid var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(34, 197, 94, 0.45);
+}
+
+/* Custom Utilities */
+.font-metric {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.animate-fade-slide {
+  animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Recharts Tooltip Overrides */
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: rgba(15, 23, 42, 0.9) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(34, 197, 94, 0.2) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+}
