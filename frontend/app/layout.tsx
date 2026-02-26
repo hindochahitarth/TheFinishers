@@ -16,11 +16,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
             </head>
-            <body className="flex min-h-screen">
+            <body className="flex h-screen overflow-hidden">
                 <Sidebar />
-                <div className="flex flex-col flex-1">
+                <div className="flex flex-col flex-1 min-w-0">
                     <TopBar />
-                    <main className="flex-1 overflow-y-auto p-6 scroll-smooth">
+                    <main className="flex-1 overflow-y-auto p-6 scroll-smooth custom-scrollbar">
                         {children}
                     </main>
                 </div>

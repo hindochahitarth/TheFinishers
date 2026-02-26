@@ -25,10 +25,15 @@ class Settings(BaseSettings):
     def async_database_url(self) -> str:
         """Sanitize database URL for Render and ensure asyncpg is used."""
         url = self.database_url
+        # Handle cases where Render provides 'postgres://' (common in legacy URLs)
         if url.startswith("postgres://"):
             url = url.replace("postgres://", "postgresql+asyncpg://", 1)
+        # Handle cases where it is 'postgresql://' but missing driver
         elif url.startswith("postgresql://") and "+asyncpg" not in url:
             url = url.replace("postgresql://", "postgresql+asyncpg://", 1)
+        # Handle cases where it might be 'postgres+asyncpg://'
+        elif url.startswith("postgres+asyncpg://"):
+            url = url.replace("postgres+asyncpg://", "postgresql+asyncpg://", 1)
         return url
 
     # ── Redis ───────────────────────────────────────────────

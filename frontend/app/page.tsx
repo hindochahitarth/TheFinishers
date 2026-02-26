@@ -1,4 +1,4 @@
-'use client'
+import Link from 'next/link'
 import { useEffect, useState, useCallback } from 'react'
 import { RefreshCw, Wind, Thermometer, Droplets, Car, AlertTriangle, CheckCircle2, MapPin, Calendar, Clock, Activity, Fingerprint, Leaf, Zap, Bot, ShieldCheck, Gauge, Cloud } from 'lucide-react'
 import {
@@ -195,9 +195,11 @@ export default function Dashboard() {
                         </div>
                     </div>
                     {data?.alert_count > 0 && (
-                        <button className="px-4 py-1.5 bg-orange-500/20 hover:bg-orange-500/30 text-orange-400 text-[10px] font-black rounded-lg transition-colors border border-orange-500/20">
-                            VIEW ALERTS
-                        </button>
+                        <Link href="/alerts">
+                            <button className="px-4 py-1.5 bg-orange-500/20 hover:bg-orange-500/30 text-orange-400 text-[10px] font-black rounded-lg transition-colors border border-orange-500/20">
+                                VIEW ALERTS
+                            </button>
+                        </Link>
                     )}
                 </div>
             </div>

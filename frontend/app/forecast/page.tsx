@@ -247,7 +247,7 @@ export default function ForecastPage() {
                     <div>
                       <p className="text-[10px] font-bold text-gray-500 uppercase leading-none mb-2">Max Projected AQI</p>
                       <div className="flex items-baseline gap-2">
-                        <span className="text-3xl font-black text-white">{Math.max(...chartData.map(d => d.aqi))}</span>
+                        <span className="text-3xl font-black text-white">{chartData.length > 0 ? Math.max(...chartData.map(d => d.aqi)) : '—'}</span>
                         <span className="text-xs font-bold text-red-500/80 uppercase">Warning</span>
                       </div>
                     </div>
@@ -255,7 +255,7 @@ export default function ForecastPage() {
                     <div>
                       <p className="text-[10px] font-bold text-gray-500 uppercase leading-none mb-2">Avg Confidence</p>
                       <div className="flex items-baseline gap-2">
-                        <span className="text-3xl font-black text-white">{Math.round(chartData.reduce((acc, d) => acc + d.confidence, 0) / chartData.length)}%</span>
+                        <span className="text-3xl font-black text-white">{chartData.length > 0 ? Math.round(chartData.reduce((acc, d) => acc + d.confidence, 0) / chartData.length) : 0}%</span>
                         <span className="text-xs font-bold text-green-500/80 uppercase">High</span>
                       </div>
                     </div>

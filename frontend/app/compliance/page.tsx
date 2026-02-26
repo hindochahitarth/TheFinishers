@@ -149,7 +149,7 @@ export default function CompliancePage() {
               </div>
 
               <div className="space-y-8">
-                {report.standards && Object.entries(report.standards).map(([stdName, stdData]) => (
+                {report && report.standards && Object.entries(report.standards).map(([stdName, stdData]) => (
                   <div key={stdName} className="relative group">
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center gap-4">
@@ -190,7 +190,7 @@ export default function CompliancePage() {
                 <h3 className="text-[10px] font-black text-indigo-400 uppercase tracking-widest leading-none">Mitigation Protocols</h3>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {report.recommendations.map((rec, i) => (
+                {report && report.recommendations && report.recommendations.map((rec, i) => (
                   <div key={i} className="flex gap-4 p-4 rounded-2xl bg-white/[0.02] border border-white/5 items-start">
                     <div className="mt-1 w-5 h-5 rounded bg-indigo-500/10 flex items-center justify-center flex-shrink-0">
                       <span className="text-[10px] font-black text-indigo-400">{i + 1}</span>

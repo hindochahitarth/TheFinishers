@@ -37,7 +37,7 @@ async def check_compliance(
     readings = result.scalars().all()
 
     if not readings:
-        return {"message": "No data available for the specified period", "location_id": location_id}
+        return assess_compliance({}, location_id, period_hours)
 
     # Compute averages for the compliance window
     def avg(attr):

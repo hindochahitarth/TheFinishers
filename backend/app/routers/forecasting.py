@@ -164,7 +164,8 @@ async def forecast_aqi(
     
     # Fallback to mock forecast
     if ML_AVAILABLE:
-        mock_forecast = create_mock_forecast(hours)
+        mock_data = create_mock_forecast(location_id, hours)
+        mock_forecast = mock_data["forecast"]
     else:
         mock_forecast = _generate_mock_forecast(db, location_id, hours, now)
     

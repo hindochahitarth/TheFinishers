@@ -79,17 +79,54 @@ def assess_compliance(
         "Compliant"
     )
 
+    # Organize stats by standard for the frontend
+    standards = {}
+    for std_name, limits in standards_checked.items():
+        pollutants_detail = {}
+        passed_count = 0
+        total_std_checks = len(limits)
+        
+        for pol, info in limits.items():
+            val = pollutants.get(pol)
+            compliant = val is None or val <= info["limit"]
+            if compliant:
+                passed_count += 1
+            
+            pollutants_detail[pol] = {
+                "value": round(val, 2) if val is not None else 0,
+                "limit": info["limit"],
+                "unit": info["unit"],
+                "compliant": compliant,
+                "exceedance_pct": round(((val - info["limit"]) / info["limit"]) * 100, 2) if val and val > info["limit"] else 0
+            }
+        
+        standards[std_name] = {
+            "pollutants": pollutants_detail,
+            "score": round((passed_count / total_std_checks) * 100, 2),
+            "passed": compliance_map[std_name]
+        }
+
+    # Technical recommendations
+    recommendations = []
+    if score < 90:
+        recommendations.append("Enhance filtration systems for PM2.5/PM10 mitigation.")
+    if not compliance_map["WHO"]:
+        recommendations.append("Update local emission targets to align with WHO 2021 air quality guidelines.")
+    if any(v["pollutant"] == "NO2" for v in violations):
+        recommendations.append("Implement traffic restriction zones (LEZs) to reduce NOx concentrations.")
+    if not recommendations:
+        recommendations.append("Maintain current environmental controls and periodic audit schedule.")
+
     return {
         "location_id": location_id,
         "assessed_at": datetime.utcnow(),
         "period_hours": period_hours,
-        "who_compliant": compliance_map["WHO"],
-        "cpcb_compliant": compliance_map["CPCB"],
-        "naaqs_compliant": compliance_map["NAAQS"],
-        "violations": violations,
-        "overall_compliance_score": score,
+        "overall_compliance": score >= 100,
+        "standards": standards,
         "risk_level": risk_level,
+        "recommendations": recommendations,
         "narrative": _generate_narrative(violations, compliance_map, score),
+        "violations": violations, # Keep for backward compatibility if any
     }
 
 

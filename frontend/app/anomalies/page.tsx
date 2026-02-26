@@ -185,10 +185,10 @@ export default function AnomaliesPage() {
           {/* Summary Cards */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {[
-              { label: 'Total Analyzed', value: anomalyData?.total_readings, color: 'text-white' },
-              { label: 'Anomalies Detected', value: anomalyData?.anomalies_detected, color: 'text-orange-400' },
-              { label: 'Anomaly Rate', value: `${anomalyData?.total_readings ? ((anomalyData.anomalies_detected / anomalyData.total_readings) * 100).toFixed(1) : 0}%`, color: 'text-white' },
-              { label: 'Regime Changes', value: changePoints?.change_points_detected, color: 'text-purple-400' },
+              { label: 'Total Analyzed', value: anomalyData?.total_readings || 0, color: 'text-white' },
+              { label: 'Anomalies Detected', value: anomalyData?.anomalies_detected || 0, color: 'text-red-400' },
+              { label: 'Anomaly Rate', value: `${((anomalyData?.anomalies_detected || 0) / (anomalyData?.total_readings || 1) * 100).toFixed(1)}%`, color: 'text-gray-400' },
+              { label: 'Regime Changes', value: changePoints?.change_points_detected || 0, color: 'text-emerald-400' },
             ].map((stat, i) => (
               <div key={i} className="glass-card p-6">
                 <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2">{stat.label}</p>

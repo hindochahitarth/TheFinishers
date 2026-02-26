@@ -225,6 +225,9 @@ async def detect_anomalies(
         return {
             "location_id": location_id,
             "period_hours": hours,
+            "pollutant_analyzed": pollutant,
+            "total_readings": len(readings),
+            "anomalies_detected": 0,
             "anomalies": [],
             "message": "Insufficient data for anomaly detection (min 10 readings required)"
         }
